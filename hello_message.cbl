@@ -3,19 +3,19 @@ PROGRAM-ID. HELLO-MESSAGE.
 
 DATA DIVISION.
    LINKAGE SECTION.
-   01 RETURNED-MESSAGE PIC A(30).
-   01 USER-NAME.
-      02 firstLetterOfName PIC A(1).
-      02 FILLER PIC A(14).
+   01 returnedMessage PIC X(30).
+   01 userName.
+      02 firstLetterOfName PIC X(1).
+      02 FILLER PIC X(14).
 
-PROCEDURE DIVISION USING RETURNED-MESSAGE, USER-NAME.
-  MOVE SPACES TO RETURNED-MESSAGE.
+PROCEDURE DIVISION USING returnedMessage, userName.
+  MOVE SPACES TO returnedMessage.
   MOVE FUNCTION UPPER-CASE(firstLetterOfName) TO firstLetterOfName.
-  IF USER-NAME = SPACES THEN
-    MOVE 'world' to USER-NAME.
+  IF userName = SPACES THEN
+    MOVE 'world' to userName.
   STRING
     'Hello, ' DELIMITED BY SIZE
-    USER-NAME DELIMITED BY SPACES
+    userName DELIMITED BY SPACES
     '!'
-  INTO RETURNED-MESSAGE.
+  INTO returnedMessage.
   GOBACK.

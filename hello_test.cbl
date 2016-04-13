@@ -12,14 +12,14 @@ DATA DIVISION.
 
 PROCEDURE DIVISION.
 
-*> if a name is passed
-    MOVE 'Jonathan' TO userName.
-    MOVE 'Hello, Jonathan!' TO expectedMessage.
-    PERFORM 'CHECK-HELLO-MESSAGE'
-
 *> if no name is passed
     MOVE SPACES TO userName.
     MOVE 'Hello, world!' TO expectedMessage.
+    PERFORM 'CHECK-HELLO-MESSAGE'
+
+*> if a name is passed
+    MOVE 'Jonathan' TO userName.
+    MOVE 'Hello, Jonathan!' TO expectedMessage.
     PERFORM 'CHECK-HELLO-MESSAGE'
 
 *> Upcase the first letter of the name
