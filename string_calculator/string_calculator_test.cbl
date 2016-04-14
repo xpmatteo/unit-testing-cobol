@@ -25,6 +25,10 @@ PROCEDURE DIVISION.
   MOVE 4 TO expectedResult.
   PERFORM "testAdd".
 
+  MOVE "1,2,7" TO inputString.
+  MOVE 10 TO expectedResult.
+  PERFORM "testAdd".
+
 
   DISPLAY SPACE.
 GOBACK.
@@ -35,7 +39,8 @@ GOBACK.
     INTO
       firstAddend
       secondAddend
-  ADD firstAddend TO secondAddend GIVING result.
+      thirdAddend
+  ADD firstAddend secondAddend TO thirdAddend GIVING result.
 
   testAdd.
   PERFORM "doAdd".
