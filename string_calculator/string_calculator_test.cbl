@@ -16,6 +16,7 @@ DATA DIVISION.
 
 PROCEDURE DIVISION.
 
+TestSuite.
   MOVE SPACE TO inputString.
   MOVE 0 TO expectedResult.
   PERFORM "testAdd".
@@ -36,15 +37,15 @@ PROCEDURE DIVISION.
   MOVE 6 TO expectedResult.
   PERFORM "testAdd".
 
-  MOVE “//;\n1;2” TO inputString.
+  MOVE "//;\n1;2" TO inputString.
   MOVE 3 TO expectedResult.
-  PERFORM "testAdd".
+*>  PERFORM "testAdd".
 
 
   DISPLAY SPACE.
-GOBACK.
+  GOBACK.
 
-  doAdd.
+doAdd.
   MOVE 0 TO result.
   MOVE 1 TO stringPointer.
   PERFORM UNTIL stringPointer > LENGTH OF inputString
@@ -55,7 +56,7 @@ GOBACK.
     ADD addend TO result
   END-PERFORM.
 
-  testAdd.
+testAdd.
   PERFORM "doAdd".
   IF result = expectedResult THEN
     DISPLAY "." WITH NO ADVANCING
