@@ -4,13 +4,16 @@ PROGRAM-ID. StringCalculatorTest.
 DATA DIVISION.
   WORKING-STORAGE SECTION.
 *> add parameters
-    01 inputString    PIC X(100).
+    01 inputString.
+      02 prefix       PIC X(2).
+      02 newDelimiter PIC X(1).
+      02 FILLER       PIC X(99).
     01 result         PIC 9(10).
 
 *> add working storage
     01 stringPointer  PIC 9(10).
     01 addend         PIC 9(10).
-    01 theDelimiter   PIC X VALUE ";".
+    01 theDelimiter   PIC X(1).
 
 *> test working storage
     01 expectedResult PIC 9(10).
@@ -40,7 +43,7 @@ TestSuite.
 
   MOVE "//;\n1;2" TO inputString.
   MOVE 3 TO expectedResult.
-*>  PERFORM "testAdd".
+  PERFORM "testAdd".
 
 
   DISPLAY SPACE.
@@ -48,10 +51,16 @@ TestSuite.
 
 doAdd.
   MOVE 0 TO result.
-  MOVE 1 TO stringPointer.
+  IF prefix = "//" THEN
+    MOVE 6 TO stringPointer
+    MOVE newDelimiter TO theDelimiter
+  ELSE
+    MOVE 1 TO stringPointer
+    MOVE "," TO theDelimiter
+  END-IF.
   PERFORM UNTIL stringPointer > LENGTH OF inputString
     UNSTRING inputString
-      DELIMITED BY "," OR "\n"
+      DELIMITED BY theDelimiter OR "\n"
       INTO addend
       WITH POINTER stringPointer
     ADD addend TO result
