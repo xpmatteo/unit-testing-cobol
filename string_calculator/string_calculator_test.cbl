@@ -9,7 +9,8 @@ DATA DIVISION.
 
 *> add working storage
     01 stringPointer  PIC 9(10).
-    01 addend    PIC 9(10).
+    01 addend         PIC 9(10).
+    01 theDelimiter   PIC X VALUE ";".
 
 *> test working storage
     01 expectedResult PIC 9(10).
