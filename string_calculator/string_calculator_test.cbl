@@ -31,7 +31,7 @@ PROCEDURE DIVISION.
 
   MOVE "1,2,7,33,44" TO inputString.
   MOVE 87 TO expectedResult.
-*>  PERFORM "testAdd".
+  PERFORM "testAdd".
 
 
   DISPLAY SPACE.
