@@ -13,6 +13,10 @@ DATA DIVISION.
 
 PROCEDURE DIVISION.
 
+  MOVE "1,2,7" TO inputString.
+  MOVE 10 TO expectedResult.
+  PERFORM "testAdd".
+
   MOVE SPACE TO inputString.
   MOVE 0 TO expectedResult.
   PERFORM "testAdd".
@@ -25,15 +29,16 @@ PROCEDURE DIVISION.
   MOVE 4 TO expectedResult.
   PERFORM "testAdd".
 
-  MOVE "1,2,7" TO inputString.
-  MOVE 10 TO expectedResult.
-  PERFORM "testAdd".
+  MOVE "1,2,7,33,44" TO inputString.
+  MOVE 87 TO expectedResult.
+*>  PERFORM "testAdd".
 
 
   DISPLAY SPACE.
 GOBACK.
 
   doAdd.
+  MOVE 0 TO firstAddend secondAddend thirdAddend.
   UNSTRING inputString
     DELIMITED BY ","
     INTO
