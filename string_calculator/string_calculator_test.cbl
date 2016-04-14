@@ -16,10 +16,6 @@ DATA DIVISION.
 
 PROCEDURE DIVISION.
 
-  MOVE "1,2,7" TO inputString.
-  MOVE 10 TO expectedResult.
-  PERFORM "testAdd".
-
   MOVE SPACE TO inputString.
   MOVE 0 TO expectedResult.
   PERFORM "testAdd".
@@ -39,6 +35,11 @@ PROCEDURE DIVISION.
   MOVE "1\n2,3" TO inputString.
   MOVE 6 TO expectedResult.
   PERFORM "testAdd".
+
+  MOVE “//;\n1;2” TO inputString.
+  MOVE 3 TO expectedResult.
+  PERFORM "testAdd".
+
 
   DISPLAY SPACE.
 GOBACK.
