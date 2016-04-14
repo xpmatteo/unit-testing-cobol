@@ -3,12 +3,15 @@ PROGRAM-ID. StringCalculatorTest.
 
 DATA DIVISION.
   WORKING-STORAGE SECTION.
+*> add parameters
     01 inputString    PIC X(100).
     01 result         PIC 9(10).
-    01 firstAddend    PIC 9(10).
-    01 secondAddend   PIC 9(10).
-    01 thirdAddend    PIC 9(10).
 
+*> add working storage
+    01 stringPointer  PIC 9(10).
+    01 addend    PIC 9(10).
+
+*> test working storage
     01 expectedResult PIC 9(10).
 
 PROCEDURE DIVISION.
@@ -38,14 +41,15 @@ PROCEDURE DIVISION.
 GOBACK.
 
   doAdd.
-  MOVE 0 TO firstAddend secondAddend thirdAddend.
-  UNSTRING inputString
-    DELIMITED BY ","
-    INTO
-      firstAddend
-      secondAddend
-      thirdAddend
-  ADD firstAddend secondAddend TO thirdAddend GIVING result.
+  MOVE 0 TO result.
+  MOVE 1 TO stringPointer.
+  PERFORM UNTIL stringPointer > LENGTH OF inputString
+    UNSTRING inputString
+      DELIMITED BY ","
+      INTO addend
+      WITH POINTER stringPointer
+    ADD addend TO result
+  END-PERFORM.
 
   testAdd.
   PERFORM "doAdd".
