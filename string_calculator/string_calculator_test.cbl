@@ -36,6 +36,9 @@ PROCEDURE DIVISION.
   MOVE 87 TO expectedResult.
   PERFORM "testAdd".
 
+  MOVE "1\n2,3" TO inputString.
+  MOVE 6 TO expectedResult.
+  PERFORM "testAdd".
 
   DISPLAY SPACE.
 GOBACK.
@@ -45,7 +48,7 @@ GOBACK.
   MOVE 1 TO stringPointer.
   PERFORM UNTIL stringPointer > LENGTH OF inputString
     UNSTRING inputString
-      DELIMITED BY ","
+      DELIMITED BY "," OR "\n"
       INTO addend
       WITH POINTER stringPointer
     ADD addend TO result
