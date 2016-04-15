@@ -3,6 +3,10 @@ PROGRAM-ID. StringCalculatorTest.
 
 DATA DIVISION.
   WORKING-STORAGE SECTION.
+*> constants
+    01 newline         PIC X   VALUE x'0a'.
+
+
 *> add parameters
     01 inputString.
       02 prefix       PIC X(2).
@@ -37,11 +41,13 @@ TestSuite.
   MOVE 87 TO expectedResult.
   PERFORM "testAdd".
 
-  MOVE "1\n2,3" TO inputString.
+  MOVE SPACES TO inputString.
+  STRING "1" newline "2,3" INTO inputString.
   MOVE 6 TO expectedResult.
   PERFORM "testAdd".
 
-  MOVE "//;\n1;2" TO inputString.
+  MOVE SPACES TO inputString.
+  STRING "//;" newline "1;2" INTO inputString.
   MOVE 3 TO expectedResult.
   PERFORM "testAdd".
 
@@ -52,7 +58,7 @@ TestSuite.
 doAdd.
   MOVE 0 TO result.
   IF prefix = "//" THEN
-    MOVE 6 TO stringPointer
+    MOVE 5 TO stringPointer
     MOVE newDelimiter TO theDelimiter
   ELSE
     MOVE 1 TO stringPointer
@@ -60,7 +66,7 @@ doAdd.
   END-IF.
   PERFORM UNTIL stringPointer > LENGTH OF inputString
     UNSTRING inputString
-      DELIMITED BY theDelimiter OR "\n"
+      DELIMITED BY theDelimiter OR newline
       INTO addend
       WITH POINTER stringPointer
     ADD addend TO result
