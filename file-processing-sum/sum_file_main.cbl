@@ -4,7 +4,10 @@ PROGRAM-ID. SUM-FILE.
 ENVIRONMENT DIVISION.
   INPUT-OUTPUT SECTION.
     FILE-CONTROL.
-      SELECT InputFile ASSIGN TO inputFileName.
+
+      SELECT InputFile ASSIGN TO inputFileName
+      ORGANIZATION IS LINE SEQUENTIAL.
+
       SELECT SumFile ASSIGN TO outputFileName.
 
 DATA DIVISION.
@@ -12,9 +15,7 @@ DATA DIVISION.
 
     FD InputFile
     RECORD IS VARYING IN SIZE DEPENDING ON inputLineLength.
-    01 InputFileRecord.
-      02 inputNumber   PIC 9999.
-      02 FILLER        PIC X VALUE x'0a'.
+    01 inputFileRecord PIC X(200).
 
     FD SumFile.
     01 SumFileRecord.
@@ -45,8 +46,8 @@ Main.
     READ InputFile
       AT END SET endOfInputFile TO TRUE
       NOT AT END
-        MOVE inputNumber TO currentNumber
-        ADD inputNumber TO runningSum
+        MOVE inputFileRecord(1:inputLineLength) TO currentNumber
+        ADD currentNumber TO runningSum
         WRITE SumFileRecord BEFORE ADVANCING 1 LINE
     END-READ
   END-PERFORM.

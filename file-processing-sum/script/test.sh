@@ -14,14 +14,14 @@ echo
 
 # end-to-end tests
 cat <<EOF > sample-input.txt
-0002
-0003
-0004
+1
+12
+ 4
 EOF
 cat <<EOF > expected-output.txt
-0002 0002
-0003 0005
-0004 0009
+0001 0001
+0012 0013
+0004 0017
 EOF
 
 expect_success ./sum_file sample-input.txt sample-output.txt
