@@ -10,9 +10,9 @@ ENVIRONMENT DIVISION.
 DATA DIVISION.
   FILE SECTION.
 
-    FD InputFile.
+    FD InputFile
+    RECORD IS VARYING IN SIZE DEPENDING ON inputLineLength.
     01 InputFileRecord.
-      88 endOfInputFile VALUE HIGH-VALUES.
       02 inputNumber   PIC 9999.
       02 FILLER        PIC X VALUE x'0a'.
 
@@ -23,8 +23,11 @@ DATA DIVISION.
       02 runningSum    PIC 9999.
 
   WORKING-STORAGE SECTION.
+    01 inputLineLength PIC 999.
     01 inputFileName PIC X(100).
     01 outputFileName PIC X(100).
+    01 inputFileStatus PIC 9 VALUE 0.
+      88 endOfInputFile VALUE 1.
 
 
 PROCEDURE DIVISION.

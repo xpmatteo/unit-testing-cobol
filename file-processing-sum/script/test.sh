@@ -25,7 +25,7 @@ cat <<EOF > expected-output.txt
 EOF
 
 expect_success ./sum_file sample-input.txt sample-output.txt
-expect_file_equal sample-output.txt expected-output.txt
+expect_file_equal expected-output.txt sample-output.txt
 
 report_any_failures
 
