@@ -19,9 +19,8 @@ DATA DIVISION.
     FD SumFile.
     01 SumFileRecord.
       02 currentNumber PIC 9999.
-      02 separator     PIC X VALUE ' '.
+      02 separator     PIC X.
       02 runningSum    PIC 9999.
-      02 endOfLine     PIC X VALUE x'0a'.
 
   WORKING-STORAGE SECTION.
     01 inputFileName PIC X(100).
@@ -34,7 +33,6 @@ Main.
   ACCEPT inputFileName FROM ARGUMENT-VALUE.
   ACCEPT outputFileName FROM ARGUMENT-VALUE.
   MOVE ' ' TO separator
-  MOVE x'0a' TO endOfLine
   MOVE 0 to runningSum
 
   OPEN INPUT InputFile.
@@ -46,7 +44,7 @@ Main.
       NOT AT END
         MOVE inputNumber TO currentNumber
         ADD inputNumber TO runningSum
-        WRITE SumFileRecord
+        WRITE SumFileRecord BEFORE ADVANCING 1 LINE
     END-READ
   END-PERFORM.
 
