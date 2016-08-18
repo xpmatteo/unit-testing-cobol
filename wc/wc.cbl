@@ -10,13 +10,14 @@ environment division.
 
 data division.
   file section.
-    fd inputfile record is varying in size.
+    fd inputfile record is varying 0 to 200 depending on inputLineLength.
     01 inputLine pic x(200).
 
   working-storage section.
     01 byteCount              pic 9(06) value 0.
     01 wordCount              pic 9(06) value 0.
     01 lineCount              pic 9(06) value 0.
+    01 inputLineLength        pic 9(06) value 0.
     
     01 outputRecord.
       02 outputLineCount      pic ZZZZZZZ9.
@@ -44,7 +45,7 @@ main.
   .
 
 parseLine.
-  add length of function trim(inputLine) to byteCount
+  add inputLineLength to byteCount
   add 1 to byteCount
   add 1 to wordCount
   add 1 to lineCount
