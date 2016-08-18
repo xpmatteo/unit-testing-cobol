@@ -18,29 +18,29 @@ data division.
       02 argumentCount pic 9999.
       02 argumentValue pic x(100).
       02 argumentIndex pic 9999.
-  
+
     01 currentFileCounters.
       02 lineCount              pic 9(06).
       02 wordCount              pic 9(06).
       02 byteCount              pic 9(06).
-      
+
     01 allFilesCounters.
       02 totalLineCount         pic 9(06) value 0.
       02 totalWordCount         pic 9(06) value 0.
       02 totalByteCount         pic 9(06) value 0.
-      
+
     01 scratchVariables.
       02 inputLineLength        pic 9(06).
       02 inputLinePointer       pic 9(03).
       02 inputWord              pic X(200).
-    
+
     01 outputRecord.
       02 outputLineCount      pic ZZZZZZZ9.
       02 outputWordCount      pic ZZZZZZZ9.
       02 outputByteCount      pic ZZZZZZZ9.
       02 filler               pic X value space.
       02 inputFileName        pic X(80).
-    
+
     01 inputFileStatus        pic 9.
       88 endOfInput value 1 false 0.
 
@@ -50,7 +50,7 @@ main.
   accept argumentCount from argument-number
   perform varying argumentIndex from 1 by 1 until argumentIndex > argumentCount
     display argumentIndex upon argument-number
-    accept inputFileName from argument-value    
+    accept inputFileName from argument-value
     perform parseFile
     perform updateTotals
   end-perform
@@ -88,7 +88,7 @@ parseLine.
 countLines.
   add 1 to lineCount
   .
-  
+
 countBytes.
   add inputLineLength to byteCount
   add 1 to byteCount
@@ -97,11 +97,11 @@ countBytes.
 countWords.
   move 1 to inputLinePointer
   perform until inputLinePointer > inputLineLength
-    unstring inputLine delimited by all spaces 
-      into inputWord 
+    unstring inputLine delimited by all spaces
+      into inputWord
       with pointer inputLinePointer
     end-unstring
-    if not inputWord = spaces 
+    if not inputWord = spaces
       add 1 to wordCount
     end-if
   end-perform
@@ -121,4 +121,3 @@ outputTotals.
   move "total" to inputFileName
   perform outputOneRecord
   .
-  
