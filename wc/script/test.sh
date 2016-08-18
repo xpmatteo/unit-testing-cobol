@@ -20,10 +20,10 @@ echo "       0       0       0 $input" > $expected
 expect_file_equal $expected $output
 
 ##--- one line, one word
-# echo 'ciao' > $input
-# echo "       1       1       4 $input" > $expected
-# ./wc $input > $output
-# expect_file_equal $expected $output
+echo 'ciao' > $input
+echo "       1       1       4 $input" > $expected
+./wc $input > $output
+expect_file_equal $expected $output
 
 report_any_failures
 
