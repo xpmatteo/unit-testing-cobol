@@ -20,9 +20,14 @@ data division.
       02 argumentIndex pic 9999.
   
     01 currentFileCounters.
-      02 byteCount              pic 9(06).
-      02 wordCount              pic 9(06).
       02 lineCount              pic 9(06).
+      02 wordCount              pic 9(06).
+      02 byteCount              pic 9(06).
+      
+    01 allFilesCounters.
+      02 totalLineCount         pic 9(06) value 0.
+      02 totalWordCount         pic 9(06) value 0.
+      02 totalByteCount         pic 9(06) value 0.
       
     01 scratchVariables.
       02 inputLineLength        pic 9(06).
@@ -47,17 +52,20 @@ main.
     display argumentIndex upon argument-number
     accept inputFileName from argument-value    
     perform parseFile
-  end-perform.
+    perform updateTotals
+  end-perform
   if argumentCount > 1
-    move 2 to lineCount
-    move 3 to wordCount
-    move 12 to byteCount
-    move "total" to inputFileName
-    perform outputOneRecord
+    perform outputTotals
   end-if
   goback
   .
-  
+
+updateTotals.
+  add lineCount to totalLineCount
+  add wordCount to totalWordCount
+  add byteCount to totalByteCount
+  .
+
 parseFile.
   open input inputFile
   move zero to currentFileCounters
@@ -105,3 +113,12 @@ outputOneRecord.
   move lineCount to outputLineCount
   display function trim(outputRecord, trailing)
   .
+
+outputTotals.
+  move totalLineCount to lineCount
+  move totalWordCount to wordCount
+  move totalByteCount to byteCount
+  move "total" to inputFileName
+  perform outputOneRecord
+  .
+  
