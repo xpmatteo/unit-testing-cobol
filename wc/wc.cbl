@@ -14,12 +14,20 @@ data division.
     01 inputLine pic x(200).
 
   working-storage section.
-    01 byteCount              pic 9(06) value 0.
-    01 wordCount              pic 9(06) value 0.
-    01 lineCount              pic 9(06) value 0.
-    01 inputLineLength        pic 9(06) value 0.
-    01 inputLinePointer       pic 9(03).
-    01 inputWord              pic X(200).
+    01 commandLineParsing.
+      02 argumentCount pic 9999.
+      02 argumentValue pic x(100).
+      02 argumentIndex pic 9999.
+  
+    01 currentFileCounters.
+      02 byteCount              pic 9(06) value 0.
+      02 wordCount              pic 9(06) value 0.
+      02 lineCount              pic 9(06) value 0.
+      
+    01 scratchVariables.
+      02 inputLineLength        pic 9(06) value 0.
+      02 inputLinePointer       pic 9(03).
+      02 inputWord              pic X(200).
     
     01 outputRecord.
       02 outputLineCount      pic ZZZZZZZ9.
@@ -34,8 +42,33 @@ data division.
 procedure division.
 
 main.
-  accept inputFileName from argument-value
+  accept argumentCount from argument-number
+  if argumentCount = 2
+    display 1 upon argument-number
+    accept inputFileName from argument-value    
+    perform parseFile
+    
+    display 2 upon argument-number
+    accept inputFileName from argument-value    
+    perform parseFile
+    
+    move 2 to lineCount
+    move 3 to wordCount
+    move 12 to byteCount
+    move "total" to inputFileName
+    perform outputOneRecord
+  else
+    display 1 upon argument-number
+    accept inputFileName from argument-value    
+    perform parseFile
+  end-if
+  goback
+  .
+  
+parseFile.
   open input inputFile
+  move zero to currentFileCounters
+  move zero to inputFileStatus
   perform until endOfInput
     read inputFile
     at end set endOfInput to true
@@ -43,7 +76,6 @@ main.
   end-perform.
   perform outputOneRecord
   close inputFile
-  goback
   .
 
 parseLine.

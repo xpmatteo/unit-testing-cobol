@@ -53,9 +53,9 @@ expect_wc "three lines" \
 echo "foo" > /tmp/input0.txt
 echo "bar baz" > /tmp/input1.txt
 cat > $expected <<EOF
-       1       1      4 /tmp/input0.txt
-       1       2      8 /tmp/input1.txt
-       2       3     12 total
+       1       1       4 /tmp/input0.txt
+       1       2       8 /tmp/input1.txt
+       2       3      12 total
 EOF
 ./wc /tmp/input0.txt /tmp/input1.txt > $output
 expect_file_equal $expected $output "$message"
