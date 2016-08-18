@@ -25,5 +25,11 @@ echo "       1       1       5 $input" > $expected
 ./wc $input > $output
 expect_file_equal $expected $output
 
+##--- one line, two words
+echo 'ciao beppe' > $input
+echo "       1       2      11 $input" > $expected
+./wc $input > $output
+expect_file_equal $expected $output
+
 report_any_failures
 
