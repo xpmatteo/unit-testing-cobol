@@ -50,13 +50,14 @@ expect_file_equal() {
   }
   local expected_file="$1"; shift
   local actual_file="$1"; shift
+  local message="$1"; shift
   if diffs="$(diff $diff_options $expected_file $actual_file)"
   then
       echo -n "."
   else
       echo -n "E"
       failures+=(
-"Failed expectation for file equality:
+"$message Failed expectation for file equality:
 $diffs
 ")
   fi
