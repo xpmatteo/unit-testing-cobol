@@ -47,10 +47,21 @@ main.
   .
 
 parseLine.
+  perform countLines
+  perform countBytes
+  perform countWords
+  .
+
+countLines.
   add 1 to lineCount
+  .
+  
+countBytes.
   add inputLineLength to byteCount
   add 1 to byteCount
+  .
 
+countWords.
   move 1 to inputLinePointer
   perform until inputLinePointer > inputLineLength
     unstring inputLine delimited by all spaces 
@@ -60,7 +71,7 @@ parseLine.
     if not inputWord = spaces 
       add 1 to wordCount
     end-if
-  end-perform.
+  end-perform
   .
 
 outputOneRecord.
