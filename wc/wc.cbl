@@ -41,8 +41,8 @@ data division.
       02 filler               pic X value space.
       02 inputFileName        pic X(80).
     
-    01 inputFileStatus        pic 9 value 0.
-      88 endOfInput value 1.
+    01 inputFileStatus        pic 9.
+      88 endOfInput value 1 false 0.
 
 procedure division.
 
@@ -69,7 +69,7 @@ updateTotals.
 parseFile.
   open input inputFile
   move zero to currentFileCounters
-  move zero to inputFileStatus
+  set endOfInput to false
   perform until endOfInput
     read inputFile
     at end set endOfInput to true
