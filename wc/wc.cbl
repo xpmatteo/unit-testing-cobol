@@ -57,7 +57,9 @@ parseLine.
       into inputWord 
       with pointer inputLinePointer
     end-unstring
-    add 1 to wordCount
+    if not inputWord = spaces 
+      add 1 to wordCount
+    end-if
   end-perform.
   .
 

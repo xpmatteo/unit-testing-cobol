@@ -1,6 +1,7 @@
 #!/bin/bash
 
 clear
+set -e
 cd "$(dirname "$0")"/..
 
 source script/lib/testing.bash
