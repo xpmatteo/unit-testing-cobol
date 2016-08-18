@@ -43,24 +43,17 @@ procedure division.
 
 main.
   accept argumentCount from argument-number
-  if argumentCount = 2
-    display 1 upon argument-number
+  perform varying argumentIndex from 1 by 1 until argumentIndex > argumentCount
+    display argumentIndex upon argument-number
     accept inputFileName from argument-value    
     perform parseFile
-    
-    display 2 upon argument-number
-    accept inputFileName from argument-value    
-    perform parseFile
-    
+  end-perform.
+  if argumentCount > 1
     move 2 to lineCount
     move 3 to wordCount
     move 12 to byteCount
     move "total" to inputFileName
     perform outputOneRecord
-  else
-    display 1 upon argument-number
-    accept inputFileName from argument-value    
-    perform parseFile
   end-if
   goback
   .
