@@ -20,12 +20,12 @@ data division.
       02 argumentIndex pic 9999.
   
     01 currentFileCounters.
-      02 byteCount              pic 9(06) value 0.
-      02 wordCount              pic 9(06) value 0.
-      02 lineCount              pic 9(06) value 0.
+      02 byteCount              pic 9(06).
+      02 wordCount              pic 9(06).
+      02 lineCount              pic 9(06).
       
     01 scratchVariables.
-      02 inputLineLength        pic 9(06) value 0.
+      02 inputLineLength        pic 9(06).
       02 inputLinePointer       pic 9(03).
       02 inputWord              pic X(200).
     
