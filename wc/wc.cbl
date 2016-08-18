@@ -11,7 +11,7 @@ environment division.
 data division.
   file section.
     fd inputfile record is varying in size.
-    01 inputfilerecord pic x(200).
+    01 inputLine pic x(200).
 
   working-storage section.
     01 byteCount              pic 9(06) value 0.
@@ -36,16 +36,20 @@ main.
   perform until endOfInput
     read inputFile
     at end set endOfInput to true
-    not at end
-      move 5 to byteCount
-      move 1 to wordCount
-      move 1 to lineCount
+    not at end perform parseLine
   end-perform.
   perform outputOneRecord
   close inputFile
   goback
   .
-  
+
+parseLine.
+  add length of function trim(inputLine) to byteCount
+  add 1 to byteCount
+  add 1 to wordCount
+  add 1 to lineCount
+  .
+
 outputOneRecord.
   move byteCount to outputByteCount
   move wordCount to outputWordCount
