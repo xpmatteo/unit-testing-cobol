@@ -18,6 +18,8 @@ data division.
     01 wordCount              pic 9(06) value 0.
     01 lineCount              pic 9(06) value 0.
     01 inputLineLength        pic 9(06) value 0.
+    01 inputLinePointer       pic 9(03).
+    01 inputWord              pic X(200).
     
     01 outputRecord.
       02 outputLineCount      pic ZZZZZZZ9.
@@ -45,10 +47,18 @@ main.
   .
 
 parseLine.
+  add 1 to lineCount
   add inputLineLength to byteCount
   add 1 to byteCount
-  add 1 to wordCount
-  add 1 to lineCount
+
+  move 1 to inputLinePointer
+  perform until inputLinePointer > inputLineLength
+    unstring inputLine delimited by all spaces 
+      into inputWord 
+      with pointer inputLinePointer
+    end-unstring
+    add 1 to wordCount
+  end-perform.
   .
 
 outputOneRecord.
