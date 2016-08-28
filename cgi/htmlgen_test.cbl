@@ -30,19 +30,19 @@ empty-div.
   perform htmlgenTest
   .
   
-*>paragraph-with-text.
-*>  move spaces to tagName
-*>  move "p" to tagName
-*>  call "htmlgen-start-element" using by content tagName
-*>  
-*>  move spaces to textContent. 
-*>  move "ciao" to textContent.
-*>  call "htmlgen-add-text-content" using by content textContent
-*>  call "htmlgen-end-element"
-*>  
-*>  move "<p>ciao</p>" to expected
-*>  perform htmlgenTest
-*>  .
+paragraph-with-text.
+  move spaces to tagName
+  move "p" to tagName
+  call "htmlgen-start-element" using by content tagName
+  
+  move spaces to textContent. 
+  move "ciao" to textContent.
+  call "htmlgen-add-text-content" using by content textContent
+  call "htmlgen-end-element"
+  
+  move "<p>ciao</p>" to expected
+  perform htmlgenTest
+  .
   
 end-test-suite.  
   display spaces
