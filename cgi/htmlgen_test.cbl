@@ -47,23 +47,23 @@ paragraph-with-text.
   perform htmlgenTest
   .
   
-*>nested-elements.
-*>  call "htmlgen-initialize" 
-*>  move spaces to tagName
-*>  move "div" to tagName
-*>  call "htmlgen-start-element" using by content tagName
-*>
-*>  move spaces to tagName
-*>  move "p" to tagName
-*>  call "htmlgen-start-element" using by content tagName
-*>  
-*>  call "htmlgen-end-element"
-*>  call "htmlgen-end-element"
-*>  
-*>  move "<div><p></p></div>" to expected
-*>  perform htmlgenTest
-*>  .
-*>  
+nested-elements.
+  call "htmlgen-initialize" 
+  move spaces to tagName
+  move "div" to tagName
+  call "htmlgen-start-element" using by content tagName
+
+  move spaces to tagName
+  move "p" to tagName
+  call "htmlgen-start-element" using by content tagName
+  
+  call "htmlgen-end-element"
+  call "htmlgen-end-element"
+  
+  move "<div><p></p></div>" to expected
+  perform htmlgenTest
+  .
+  
 end-test-suite.  
   display spaces
   goback
