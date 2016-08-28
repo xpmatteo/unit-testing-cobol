@@ -10,30 +10,36 @@ data division.
 
 procedure division.
 
+
+empty-p.
   move spaces to tagName.
   move "p" to tagName.
   call "htmlgen-start-element" using by content tagName.
   move "<p></p>" to expected
   perform htmlgenTest
+  .
 
-  move spaces to tagName.
-  move "div" to tagName.
-  call "htmlgen-start-element" using by content tagName.
+empty-div.
+  move spaces to tagName
+  move "div" to tagName
+  call "htmlgen-start-element" using by content tagName
   move "<div></div>" to expected
   perform htmlgenTest
-  
+  .
+
+end-test-suite.  
   display spaces
   goback
   .
-  
-  htmlgenTest.
 
-    call "htmlgen-tostring" using htmlOutput
-    if htmlOutput = expected
-      display "." with no advancing
-    else
-      display "E"
-      display "Expected --" expected "--"
-      display "But was  --" htmlOutput "--"
-    end-if
-    .
+
+htmlgenTest.
+  call "htmlgen-tostring" using htmlOutput
+  if htmlOutput = expected
+    display "." with no advancing
+  else
+    display "E"
+    display "Expected --" expected "--"
+    display "But was  --" htmlOutput "--"
+  end-if
+  .
