@@ -9,15 +9,20 @@ data division.
 
 procedure division.
 
-  call "htmlgen-tostring" using htmlOutput
   move "<p></p>" to expected
-  if htmlOutput = expected
-    display "." with no advancing
-  else
-    display "E"
-    display "Expected --" function trim(expected) "--"
-    display "But was  --" function trim(htmlOutput) "--"
-  end-if
-  display spaces
+  perform htmlgenTest
+  goback
+  .
+  
+  htmlgenTest.
 
-  goback.
+    call "htmlgen-tostring" using htmlOutput
+    if htmlOutput = expected
+      display "." with no advancing
+    else
+      display "E"
+      display "Expected --" function trim(expected) "--"
+      display "But was  --" function trim(htmlOutput) "--"
+    end-if
+    display spaces
+    .
