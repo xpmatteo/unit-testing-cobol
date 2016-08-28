@@ -15,6 +15,14 @@ procedure division.
   call "htmlgen-start-element" using by content tagName.
   move "<p></p>" to expected
   perform htmlgenTest
+
+  move spaces to tagName.
+  move "div" to tagName.
+  call "htmlgen-start-element" using by content tagName.
+  move "<div></div>" to expected
+  perform htmlgenTest
+  
+  display spaces
   goback
   .
   
@@ -28,5 +36,4 @@ procedure division.
       display "Expected --" expected "--"
       display "But was  --" htmlOutput "--"
     end-if
-    display spaces
     .
