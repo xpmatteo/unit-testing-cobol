@@ -6,7 +6,9 @@ data division.
   working-storage section.
     01 htmlOutput   pic x(1000).
     01 expected     pic x(1000).
-    01 tagName      pic x(100).
+    01 tagName        pic x(100).
+    01 attributeName  pic x(100).
+    01 attributeValue pic x(100).
     01 textContent  pic x(100).
 
 procedure division.
@@ -67,17 +69,16 @@ nested-elements.
 tag-with-attributes.
   call "htmlgen-initialize" 
   move spaces to tagName
-  move "div" to tagName
+  move "ul" to tagName
   call "htmlgen-start-element" using by content tagName
 
-  move spaces to tagName
-  move "p" to tagName
-  call "htmlgen-start-element" using by content tagName
-  
+  move "id" to attributeName
+  move "pippo" to attributeValue
+  call "htmlgen-add-attribute" using by content attributeName, by content attributeValue
+
   call "htmlgen-end-element"
-  call "htmlgen-end-element"
   
-  move "<div><p></p></div>" to expected
+  move "<ul id='pippo'></ul>" to expected
   perform htmlgenTest
   .
   

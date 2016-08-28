@@ -13,6 +13,8 @@ data division.
     01 outputBufferArgument pic x(1000).
     01 tagName pic x(100).
     01 textContent pic x(100).
+    01 attributeName  pic x(100).
+    01 attributeValue pic x(100).
 
 
 procedure division.
@@ -31,6 +33,18 @@ procedure division.
         openTagNames(indentLevel) delimited by space 
       ">" 
       into outputBuffer
+      with pointer outputBufferPointer
+    goback.
+    
+  entry "htmlgen-add-attribute" using by content attributeName, by content attributeValue
+    subtract 1 from outputBufferPointer
+    string 
+      " " delimited by size
+      attributeName delimited by spaces
+      "='"
+      attributeValue delimited by spaces
+      "'>"
+      into outputBuffer 
       with pointer outputBufferPointer
     goback.
 
