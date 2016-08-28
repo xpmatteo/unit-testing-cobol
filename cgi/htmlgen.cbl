@@ -8,7 +8,7 @@ data division.
     01 outputBufferPointer pic 9(4).
 
   linkage section.
-    01 htmlOutput pic x(1000).
+    01 outputBufferArgument pic x(1000).
     01 tagNameArgument pic x(100).
     
 
@@ -16,8 +16,8 @@ procedure division.
 
   entry "htmlgen-start-element" using by content tagNameArgument
     move 1 to outputBufferPointer
-    move tagNameArgument to tagName
     move spaces to outputBuffer
+    move tagNameArgument to tagName
     string 
       "<" 
         tagName delimited by space 
@@ -26,8 +26,8 @@ procedure division.
       with pointer outputBufferPointer
     goback.
 
-  entry "htmlgen-tostring" using htmlOutput
-    move outputBuffer to htmlOutput
+  entry "htmlgen-tostring" using outputBufferArgument
+    move outputBuffer to outputBufferArgument
     goback.
 
   entry "htmlgen-end-element"
