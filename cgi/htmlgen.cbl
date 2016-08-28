@@ -8,6 +8,7 @@ data division.
 procedure division.
 
   entry "htmlgen-tostring" using htmlOutput
+  move "<p></p>" to htmlOutput
   .
 
   goback.

@@ -18,5 +18,6 @@ procedure division.
     display "Expected --" function trim(expected) "--"
     display "But was  --" function trim(htmlOutput) "--"
   end-if
+  display spaces
 
   goback.
