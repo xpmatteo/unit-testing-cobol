@@ -13,21 +13,19 @@ data division.
 procedure division.
 
   entry "htmlgen-start-element" using by content tagName
-  move spaces to outputBuffer
-  string 
-    "<" 
-      tagName delimited by space 
-    "></" 
-      tagName delimited by space 
-    ">" 
-    into outputBuffer
-  goback.
-  .
+    move spaces to outputBuffer
+    string 
+      "<" 
+        tagName delimited by space 
+      "></" 
+        tagName delimited by space 
+      ">" 
+      into outputBuffer
+    goback.
 
   entry "htmlgen-tostring" using htmlOutput
-  move outputBuffer to htmlOutput
-  goback.
-  .
+    move outputBuffer to htmlOutput
+    goback.
 
 
 
