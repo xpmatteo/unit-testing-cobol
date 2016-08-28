@@ -15,9 +15,12 @@ data division.
 
 procedure division.
 
-  entry "htmlgen-start-element" using by content tagNameArgument
+  entry "htmlgen-initialize"
     move 1 to outputBufferPointer
     move spaces to outputBuffer
+    goback.
+
+  entry "htmlgen-start-element" using by content tagNameArgument
     move tagNameArgument to tagName
     string 
       "<" 
