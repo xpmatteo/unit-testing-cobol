@@ -11,7 +11,7 @@ data division.
 
   linkage section.
     01 outputBufferArgument pic x(1000).
-    01 tagNameArgument pic x(100).
+    01 tagName pic x(100).
     01 textContentArgument pic x(100).
 
 
@@ -23,9 +23,9 @@ procedure division.
     move spaces to outputBuffer
     goback.
 
-  entry "htmlgen-start-element" using by content tagNameArgument
+  entry "htmlgen-start-element" using by content tagName
     add 1 to indentLevel
-    move tagNameArgument to openTagNames(indentLevel)
+    move tagName to openTagNames(indentLevel)
     string 
       "<" 
         openTagNames(indentLevel) delimited by space 
