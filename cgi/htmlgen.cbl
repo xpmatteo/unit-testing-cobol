@@ -12,7 +12,7 @@ data division.
   linkage section.
     01 outputBufferArgument pic x(1000).
     01 tagName pic x(100).
-    01 textContentArgument pic x(100).
+    01 textContent pic x(100).
 
 
 procedure division.
@@ -48,9 +48,9 @@ procedure division.
     subtract 1 from indentLevel
     goback.
 
-  entry "htmlgen-add-text-content" using by content textContentArgument
+  entry "htmlgen-add-text-content" using by content textContent
     string
-      textContentArgument delimited by space
+      textContent delimited by space
       into outputBuffer
       with pointer outputBufferPointer
     goback.
