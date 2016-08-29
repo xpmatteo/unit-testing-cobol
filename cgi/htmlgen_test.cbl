@@ -72,13 +72,17 @@ tag-with-attributes.
   move "ul" to tagName
   call "htmlgen-start-element" using by content tagName
 
+  move "class" to attributeName
+  move "pluto" to attributeValue
+  call "htmlgen-add-attribute" using by content attributeName, by content attributeValue
+
   move "id" to attributeName
   move "pippo" to attributeValue
   call "htmlgen-add-attribute" using by content attributeName, by content attributeValue
 
   call "htmlgen-end-element"
   
-  move "<ul id='pippo'></ul>" to expected
+  move "<ul id='pippo' class='pluto'></ul>" to expected
   perform htmlgenTest
   .
   
